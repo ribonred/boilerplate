@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.idea
+.vscode
+.htaccess
+db.sqlite3
+tmp/
+passenger_wsgi.py
+.env
+.app
+staticfiles/
+migrations/
+backendmodel/*.py
