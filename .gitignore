@@ -10,3 +10,4 @@ passenger_wsgi.py
 .app
 staticfiles/
 migrations/
+.gitignore
