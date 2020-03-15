@@ -10,5 +10,4 @@ passenger_wsgi.py
 .app
 staticfiles/
 migrations/
-backendmodel/
-!conf.txt
+backendmodel/!conf.txt
