@@ -1,1 +1,0 @@
-ADDITIONAL_APPS = rest_framework,backendmodel.organizations

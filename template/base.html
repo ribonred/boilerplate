@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% include "snippets/bootstrap.html" %}
+</head>
+
+<body>
+    {% block navbar %}
+
+    {% endblock  %}
+
+    {% block content %}
+
+    {% endblock %}
+    {% include "snippets/script.html" %}
+
+</body>
+
+</html>
