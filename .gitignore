@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.idea
+.vscode
+.htaccess
+tmp/
+env/
+ta-lib/
+db.sqlite3
+*.csv
+*.zip
+logger/
+.log
+Pipfile
