@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "controller"
+version = "0.1.0"
+description = ""
+authors = ["rede akbar wijaya <rede@soberdev.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.1.4"
+pydantic = "^1.10.2"
+python-dotenv = "^0.21.0"
+psycopg2-binary = "^2.9.5"
+django-extensions = "^3.2.1"
+django-simple-history = "^3.2.0"
+django-structlog = "^4.0.1"
+django-unfold = "^0.3.3"
+django-debug-toolbar = "^3.8.1"
+django-lifecycle = "^1.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+flake8 = "^6.0.0"
+ipython = "^8.7.0"
+django-browser-reload = "^1.6.0"
+pre-commit = "^2.21.0"
+poethepoet = "^0.17.1"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.2.0"
+pytest-sugar = "^0.9.6"
+pytest-mock = "^3.10.0"
+pytest-django = "^4.5.2"
+faker = "^15.3.4"
+[tool.poe.tasks]
+shell = {cmd = "python manage.py shell_plus --ipython"}
+command = {cmd = "python manage.py", help= "running manage.py"}
+install = {cmd = "poetry install", help= "install dependecies"}
+runserver = {cmd = "python manage.py runserver", help= "running the server"}
+loadfixtures = {cmd = "python manage.py loaddata fixtures/fixtures2.yaml", help= "load fixure"}
+dump_db = {cmd = "python manage.py dumpdata --exclude contenttypes --exclude auth.permission --exclude admin.logentry --exclude sessions.session --natural-foreign --format yaml > fixtures/fixtures2.yaml"}
+reset_db = {cmd = "python manage.py reset_db --no-input", help= "resetdb"}
+reset = ["reset_db", "migrate", "loadfixtures"]
+server = ["install","migrate", "runserver"]
+runervers3 = {cmd = "python manage.py runserver --settings=config.settings.local_s3", help= "running the server with s3 bucket"}
+servers3 = ["install", "migrate", "runervers3"]
+migrate = {cmd = "python manage.py migrate", help= "run database change"}
+migrations = {cmd = "python manage.py makemigrations", help= "create migration files"}
+createsu = {cmd = "python manage.py createsuperuser", help= "create supuer user"}
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

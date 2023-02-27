@@ -1,0 +1,30 @@
+[flake8]
+# https://github.com/PyCQA/flake8-bugbear#how-to-enable-opinionated-warnings
+max-line-length = 88
+max-complexity = 12
+extend-select = C,E,F,W,B,B950
+extend-ignore =
+    # whitespace before ‘,’, ‘;’, or ‘:’ (This one is for Black)
+    E203,
+    # line too long (82 characters) (For flake8-bugbear)
+    E501
+exclude =
+    .git,
+    .github,
+    .venv,
+    .pytest_cache,
+    __pycache__,
+    config/settings/test
+    installer,
+    locale,
+    logs/logfile,
+    static,
+    templates,
+    migrations
+per-file-ignores =
+    # config files extends from base.py
+    config/settings/local.py:F403,F405
+    config/settings/local_test.py:F401,F403,F405
+    config/settings/development.py:F403,F405
+    config/settings/development_test.py:F401,F403,F405
+    config/settings/production.py:F403,F405
