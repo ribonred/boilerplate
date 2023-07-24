@@ -57,7 +57,6 @@ class BaseEnv(BaseSettings):
     INTERNAL_IPS: tuple = ("127.0.0.1",)
     ROOT_URLCONF: str = "config.urls"
 
-
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
@@ -65,7 +64,6 @@ class BaseEnv(BaseSettings):
 
 class EnvironSettings(BaseEnv):
     pass
-
 
 
 class LocalConfig(BaseSettings):

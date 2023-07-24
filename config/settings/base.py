@@ -15,6 +15,7 @@ locals().update(ENVIRONT_SETTINGS.dict(exclude_none=True))
 # Application definition
 INSTALLED_APPS = []
 DJANGO_DEFAULT_APPS = [
+    "daphne",
     "unfold",  # before django.contrib.admin
     "unfold.contrib.filters",
     "django.contrib.admin",
