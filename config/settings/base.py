@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 ENVIRONT_SETTINGS = EnvironSettings()
-locals().update(ENVIRONT_SETTINGS.dict(exclude_none=True))
+locals().update(ENVIRONT_SETTINGS.model_dump(exclude_none=True))
 
 # Application definition
 INSTALLED_APPS = []
@@ -119,7 +119,6 @@ MIDDLEWARE = [
     "simple_history.middleware.HistoryRequestMiddleware",
     "django_structlog.middlewares.RequestMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 

@@ -1,14 +1,13 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class DbEngine(BaseSettings):
     """Manage Engine settings only"""
 
     ENGINE: str = "django.db.backends.sqlite3"
-
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    model_config: SettingsConfigDict = SettingsConfigDict(
+        env_file=".env", env_file_encoding="utf-8"
+    )
 
 
 class SQLiteSettings(DbEngine):
@@ -24,12 +23,12 @@ class PostgresSettings(BaseSettings):
     PORT: str
     USER: str
     PASSWORD: str
-
-    class Config:
-        env_prefix = "POSTGRES_"
-        case_sensitive = True
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    model_config: SettingsConfigDict = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        env_prefix="POSTGRES_",
+        case_sensitive=True,
+    )
 
 
 class DatabaseSettings(BaseSettings):
@@ -56,10 +55,9 @@ class BaseEnv(BaseSettings):
     AUTH_USER_MODEL: str = "authentication.User"
     INTERNAL_IPS: tuple = ("127.0.0.1",)
     ROOT_URLCONF: str = "config.urls"
-
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    model_config: SettingsConfigDict = SettingsConfigDict(
+        env_file=".env", env_file_encoding="utf-8"
+    )
 
 
 class EnvironSettings(BaseEnv):
@@ -68,5 +66,4 @@ class EnvironSettings(BaseEnv):
 
 class LocalConfig(BaseSettings):
     ADDITIONAL_APPS: list[str] = [
-        "django_browser_reload",
     ]
