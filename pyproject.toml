@@ -1,0 +1,132 @@
+[project]
+name = "boilerplate"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "dependency-injector>=4.47.1",
+    "django>=5.2.3",
+    "django-extensions>=4.1",
+    "djangorestframework-simplejwt>=5.5.0",
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.9.1",
+]
+[tool.ruff]
+extend-exclude = ["migrations"]
+exclude = [
+    ".venv",
+    "migrations",
+]
+line-length = 80
+
+
+[tool.ruff.format]
+quote-style = "double"
+
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    "T201",
+]
+ignore = ["B904"]
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"config/settings/base.py" = ["E501"]
+"config/settings/local.py" = ["F403", "F405"]
+
+[dependency-groups]
+test = [
+    "pytest>=8.4.0",
+    "pytest-django>=4.9.0",
+    "factory-boy>=3.3.0",
+    "pytest-mock>=3.14.0",
+    "pytest-cov>=6.0.0",
+    "faker>=37.4.0",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.local"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+python_classes = ["Test*", "*Tests", "*Test"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "--tb=short",
+    "--cov=modules",
+    "--cov=apis",
+    "--cov-report=term-missing:skip-covered",
+    "--cov-report=html:htmlcov",
+    "--cov-fail-under=10",
+]
+testpaths = ["tests", "apis", "modules"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "api: marks tests as API tests",
+    "auth: marks tests as authentication related",
+    "user: marks tests as user related",
+]
+filterwarnings = [
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["modules", "apis"]
+omit = [
+    "*/migrations/*",
+    "*/migrations.py",
+    "**/migrations/**",
+    "*/settings.py",
+    "**/settings/**",
+    "*/forms.py",
+    "*/urls.py",
+    "*/admin.py",
+    "**/forms.py",
+    "*/test*",
+    "**/test*",
+    "*/conftest.py",
+    "**/conftest.py",
+    "*/venv/*",
+    "*/.venv/*",
+    "*/env/*",
+    "*/.env/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "def __str__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+show_missing = true
+skip_covered = false
+
+[tool.coverage.html]
+directory = "htmlcov"
